@@ -24,10 +24,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
-      app
-      :clipped-left="clipped"
-    >
+    <v-toolbar app :clipped-left="clipped">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
@@ -64,33 +61,31 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
+      <span>&copy; 2018</span>
     </v-footer>
   </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld'
+<script lang="ts">
+import {Component, Vue} from 'vue-property-decorator'
+import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
+@Component({
   components: {
-    HelloWorld
+    HelloWorld,
   },
-  data () {
-    return {
-      clipped: false,
-      drawer: true,
-      fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
+})
+export default class App extends Vue {
+  private clipped = false
+  private drawer = true
+  private fixed = false
+  private items = [{
+    icon: 'bubble_chart',
+    title: 'Inspire',
+  }]
+  private miniVariant = false
+  private right = true
+  private rightDrawer = false
+  private title = 'Title.js'
 }
 </script>
