@@ -22,9 +22,14 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '*',
-      name: '404',
+      path: '/error/:type',
+      name: 'error',
+      props: true,
       component: () => import(/* webpackChunkName: "error" */ './views/Error.vue'),
+    },
+    {
+      path: '*',
+      redirect: '/error/404',
     },
   ],
 })
