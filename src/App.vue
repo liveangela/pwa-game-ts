@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app
+  v-app.wrapper
     v-content
       v-container(fluid)
         router-view
@@ -40,3 +40,9 @@ export default class App extends Vue {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.wrapper
+  max-width 1024px
+  margin 0 auto
+</style>
