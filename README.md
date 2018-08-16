@@ -1,5 +1,16 @@
 # vuetify-pwa
 
+## Includes
+- PWA
+- Vue2.5+
+- Vue-cli3
+- Vue-Router
+- Vuex
+- Vuetify
+- Typescript
+- Pug
+- Stylus
+
 ## Project setup
 ```
 npm install
