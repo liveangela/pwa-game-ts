@@ -1,14 +1,13 @@
 <template lang="pug">
   v-container(fluid)
-    v-slide-y-transition(mode="out-in")
-      v-layout(column align-center)
-        img.mb-5(src="@/assets/logo.png" alt="Vuetify.js")
-        blockquote
-          | &#8220;First, solve the problem. Then, write the code.&#8221;
-          footer
-            small
-              em
-                | &mdash;John Johnson
+    v-layout(column align-center)
+      img.mb-5(src="@/assets/logo.png" alt="Vuetify.js")
+      blockquote
+        | &#8220;First, solve the problem. Then, write the code.&#8221;
+        footer
+          small
+            em
+              | &mdash;John Johnson
 </template>
 
 <script lang="ts">
@@ -16,7 +15,8 @@ import {Component, Prop, Vue} from 'vue-property-decorator'
 
 @Component
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string
+  @Prop()
+  private msg!: string
 }
 </script>
 

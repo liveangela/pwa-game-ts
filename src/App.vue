@@ -1,13 +1,11 @@
 <template lang="pug">
   v-app.wrapper
     v-content
-      v-container(fluid)
-        router-view
+      router-view
     v-bottom-nav(
       :active.sync="bottomNav"
       :color="color"
-      :value="true"
-      absolute
+      :value="isBottomNavShown"
       app
     )
       v-btn(
@@ -22,9 +20,13 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
+import {State} from 'vuex-class'
 
 @Component
 export default class App extends Vue {
+  @State
+  private isBottomNavShown!: boolean
+
   private bottomNav = 0
   private bottomList = [
     {text: 'Video', icon: 'ondemand_video', color: 'blue-grey', path: '/'},

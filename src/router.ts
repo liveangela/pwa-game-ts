@@ -5,7 +5,11 @@ import Home from './views/Home.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const pathListWithoutBottomNav = [
+  'newrole',
+]
+
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -15,7 +19,7 @@ export default new Router({
       component: Home,
       beforeEnter: (to, from, next) => {
         if (!Store.state.activeRole) {
-          next('/createRole')
+          next('/newrole')
         } else {
           next()
         }
@@ -30,8 +34,8 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/createRole',
-      name: 'createRole',
+      path: '/newrole',
+      name: 'newrole',
       component: () => import(/* webpackChunkName: "createRole" */ './views/CreateRole.vue'),
     },
     {
@@ -46,3 +50,12 @@ export default new Router({
     },
   ],
 })
+
+router.beforeEach((to, from, next) => {
+  // bottomNav control
+  const isBottomNavShown = !pathListWithoutBottomNav.includes(to.name || '')
+  Store.dispatch('setBottomNavShown', isBottomNavShown)
+  next()
+})
+
+export default router
