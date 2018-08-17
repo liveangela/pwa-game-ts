@@ -1,4 +1,4 @@
-# vuetify-pwa
+# pwa-game
 
 ## Includes
 - PWA
