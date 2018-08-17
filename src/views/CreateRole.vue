@@ -2,7 +2,7 @@
   v-slide-y-transition
     v-container(fluid fill-height)
       v-layout(justify-center align-center)
-        v-flex(xs6)
+        v-flex(xs8)
           v-form(v-model="isFormValid" ref="form" lazy-validation)
             v-text-field(
               v-model="formData.name"
@@ -13,9 +13,9 @@
               required
             )
             v-layout(row justify-space-between mt-4)
-              v-flex(xs5)
+              v-flex.text-xs-center(xs5)
                 v-btn(:disabled="!isFormValid" @click="submit") Create
-              v-flex(xs5)
+              v-flex.text-xs-center(xs5)
                 v-btn(@click="clear") Clear
 </template>
 
