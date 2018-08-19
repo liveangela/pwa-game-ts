@@ -32,5 +32,13 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "vue": {
+    "pwa": {
+      "workboxPluginMode": "InjectManifest",
+      "workboxOptions": {
+        "swSrc": "src/workers/sw.js"
+      }
+    }
+  }
 }
