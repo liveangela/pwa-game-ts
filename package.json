@@ -37,6 +37,7 @@
     "pwa": {
       "workboxPluginMode": "InjectManifest",
       "workboxOptions": {
+        "importWorkboxFrom": "disabled",
         "swSrc": "src/workers/sw.js"
       }
     }

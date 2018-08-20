@@ -1,6 +1,14 @@
+const baseUrl = '/api'
+
 const headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json;charset=utf-8',
 }
+
+const getInit = (data: object) => ({
+  headers,
+  method: 'POST',
+  body: JSON.stringify(data),
+})
 
 const handleResponse = (response: Response) => {
   if (response.ok) {
@@ -13,16 +21,9 @@ const handleResponse = (response: Response) => {
   }
 }
 
-const handleError = (error: Error) => {
-  console.error(error)
-}
+const handleError = (error: Error) => console.error(error)
 
-export const createRoleFetch = (data: object) => {
-  const request = new Request('/createRole', {
-    headers,
-    method: 'POST',
-    body: JSON.stringify(data),
-  })
-  // TODO: fetch no work, 404 error
-  return fetch(request).then(handleResponse).catch(handleError)
-}
+export const createRoleFetch = (data: object) => fetch(
+  `${baseUrl}/createRole`,
+  getInit(data),
+).then(handleResponse).catch(handleError)
