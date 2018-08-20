@@ -1,18 +1,28 @@
-const successCB = (response: Response) => {
-  if (response.status === 200) {
-    return response.json()
+const headers = {
+  'Content-Type': 'application/json',
+}
+
+const handleResponse = (response: Response) => {
+  if (response.ok) {
+    return response.json() // is a promise
   } else {
-    throw new Error('Something went wrong on api server!')
+    return Promise.reject({
+      status: response.status,
+      statusText: response.statusText,
+    })
   }
 }
 
-const errorCB = (error: Error) => {
+const handleError = (error: Error) => {
   console.error(error)
 }
 
 export const createRoleFetch = (data: object) => {
-  const body = JSON.stringify(data)
-  const request = new Request('/createRole', {method: 'POST', body})
+  const request = new Request('/createRole', {
+    headers,
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
   // TODO: fetch no work, 404 error
-  return fetch(request).then(successCB).catch(errorCB)
+  return fetch(request).then(handleResponse).catch(handleError)
 }
