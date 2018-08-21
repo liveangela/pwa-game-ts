@@ -22,3 +22,5 @@ workbox.routing.registerRoute(/\/api/, ({url, event}) => {
     }())
   }
 }, 'POST');
+workbox.clientsClaim();
+workbox.skipWaiting();
