@@ -1,9 +1,9 @@
 import {register} from 'register-service-worker'
 
-const path = process.env.NODE_ENV === 'production' ? process.env.BASE_URL : './'
+const file = process.env.NODE_ENV === 'production' ? `${process.env.BASE_URL}sw.js` : './sw.ts'
 
 // TODO: dev register no work, the path is wrong
-register(`${path}sw.js`, {
+register(file, {
   ready() {
     console.log(
       'App is being served from cache by a service worker.\n' +
