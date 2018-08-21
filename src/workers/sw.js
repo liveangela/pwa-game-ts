@@ -1,43 +1,25 @@
-importScripts('/js/gpu.min.js')
+importScripts('/js/gpu.min.js');
+
+const gameDealer = {
+  createRole(body) {
+    return {val: body.name + '-done'};
+  },
+}
 
 workbox.core.setCacheNameDetails({prefix: "pwa-game"});
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
-
-const baseUrl = '/api/' // same in accesslayer.ts
-
-const gameDealer = {
-  createRole() {
-    return 'haha1'
-  },
-}
-
-const apiPool = Object.keys(gameDealer)
-
-self.addEventListener('fetch', (e) => {
-  console.log('request event is: ', e)
-  const {request} = e
-  e.respondWith(
-    caches.match(request).then((cacheRes) => {
-      // cache
-      if (cacheRes) return cacheRes
-
-      // game
-      const {url} = request
-      let data
-      for (let i = 0, len = apiPool.length; i < len; i += 1) {
-        const t = apiPool[i]
-        if (url.match(baseUrl + t)) {
-          const data = gameDealer[t]()
-          break
-        }
-      }
-      if (data) return new Response(data)
-
-      // server
-      const serverReq = request.clone()
-      return fetch(serverReq)
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {
+  cleanUrls: false, // dont add .html to end to support "clean" URLs
+});
+workbox.routing.registerRoute(/\/api/, ({url, event}) => {
+  const dealerName = url.pathname.split('/').pop();
+  console.log('dealerName', dealerName)
+  if (gameDealer[dealerName]) {
+    event.request.json().then((body) => {
+      console.log('body', body)
+      const res = gameDealer[dealerName](body);
+      return new Response(JSON.stringify(res));
     })
-  )
-})
+  }
+}, 'POST');
