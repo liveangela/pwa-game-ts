@@ -21,6 +21,7 @@
     "@vue/cli-plugin-pwa": "^3.0.0",
     "@vue/cli-plugin-typescript": "^3.0.0",
     "@vue/cli-service": "^3.0.0",
+    "material-design-icons-iconfont": "^3.0.3",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "typescript": "^3.0.0",
@@ -37,7 +38,8 @@
     "pwa": {
       "workboxPluginMode": "InjectManifest",
       "workboxOptions": {
-        "importWorkboxFrom": "disabled",
+        "importWorkboxFrom": "local",
+        "importsDirectory": "js",
         "swSrc": "src/workers/sw.js"
       }
     }

@@ -1,4 +1,9 @@
-importScripts('/js/workbox-sw3.4.1.js', '/js/gpu1.6.0.js')
+importScripts('/js/gpu.min.js')
+
+workbox.core.setCacheNameDetails({prefix: "pwa-game"});
+self.__precacheManifest = [].concat(self.__precacheManifest || []);
+workbox.precaching.suppressWarnings();
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 const baseUrl = '/api/' // same in accesslayer.ts
 
