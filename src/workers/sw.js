@@ -14,12 +14,11 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {
 });
 workbox.routing.registerRoute(/\/api/, ({url, event}) => {
   const dealerName = url.pathname.split('/').pop();
-  console.log('dealerName', dealerName)
   if (gameDealer[dealerName]) {
-    event.request.json().then((body) => {
-      console.log('body', body)
+    event.respondWith(async function() {
+      const body = event.request.json();
       const res = gameDealer[dealerName](body);
       return new Response(JSON.stringify(res));
-    })
+    }())
   }
 }, 'POST');
