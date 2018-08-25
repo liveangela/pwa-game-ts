@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './plugins/worker'
 import './plugins/vuetify'
+import './plugins/accesslayer'
 
 Vue.config.productionTip = false
 

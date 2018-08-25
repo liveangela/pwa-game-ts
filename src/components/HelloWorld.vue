@@ -12,11 +12,19 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator'
+import {State} from 'vuex-class'
 
 @Component
 export default class HelloWorld extends Vue {
   @Prop()
   private msg!: string
+
+  @State
+  private activeRole!: object
+
+  private mounted() {
+    console.log(JSON.stringify(this.activeRole))
+  }
 }
 </script>
 
