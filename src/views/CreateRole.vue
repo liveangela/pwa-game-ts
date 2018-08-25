@@ -22,7 +22,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
 import {Action} from 'vuex-class'
-import {createRoleFetch} from '@/middlewares/accesslayer'
+import accesslayer from '@/middlewares/accesslayer'
 
 @Component
 export default class CreateRole extends Vue {
@@ -46,7 +46,7 @@ export default class CreateRole extends Vue {
 
   private submit() {
     if (this.form.validate()) {
-      createRoleFetch(this.formData).then((data: object) => {
+      accesslayer.createRole(this.formData).then((data: object) => {
         this.setActiveRole(data)
         this.$router.push('/')
       })

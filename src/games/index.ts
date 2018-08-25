@@ -1,9 +1,17 @@
-import BaseRoleClass from './BaseRole'
+import {IBaseRoleInput, BaseRole} from './BaseRole'
 
 const map: {
   [index: string]: any,
 } = {
-  createRole: BaseRoleClass,
+  createRole(data: IBaseRoleInput) {
+    return new Promise((resolve, reject) => {
+      try {
+        resolve(new BaseRole(data))
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
 }
 
 export default map

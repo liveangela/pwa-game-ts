@@ -1,10 +1,10 @@
-import {randomName} from '../utils'
+import {randomName} from './utils'
 
-interface IBaseRoleInput {
+export interface IBaseRoleInput {
   name: string,
 }
 
-export default class BaseRole {
+export class BaseRole {
   private name!: string
   private coin = 0
   private gold = 0
