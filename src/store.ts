@@ -1,7 +1,13 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, {Payload} from 'vuex'
+import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)
+
+export interface State {
+  activeRole: any
+  isBottomNavShown: boolean
+}
 
 export default new Vuex.Store({
   state: {
@@ -24,4 +30,5 @@ export default new Vuex.Store({
       commit('setBottomNavShown', val)
     },
   },
+  plugins: [(new VuexPersistence<State, Payload>({})).plugin],
 })

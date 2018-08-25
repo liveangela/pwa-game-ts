@@ -37,6 +37,13 @@ const router = new Router({
       path: '/newrole',
       name: 'newrole',
       component: () => import(/* webpackChunkName: "createRole" */ './views/CreateRole.vue'),
+      beforeEnter: (to, from, next) => {
+        if (Store.state.activeRole) {
+          next('/')
+        } else {
+          next()
+        }
+      },
     },
     {
       path: '/error/:type',
