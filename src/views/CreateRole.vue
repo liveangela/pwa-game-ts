@@ -14,21 +14,32 @@
             )
             v-layout(row justify-space-between mt-4)
               v-flex.text-xs-center(xs5)
-                v-btn(:disabled="!isFormValid" @click="submit") Create
+                v-btn(
+                  :disabled="!isFormValid"
+                  :loading="isDialogShown"
+                  @click="submit"
+                ) Create
               v-flex.text-xs-center(xs5)
                 v-btn(@click="clear") Clear
+      fullscreen-loader(:isDialogShown="isDialogShown")
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
 import {Action} from 'vuex-class'
+import FullscreenLoader from '@/components/FullscreenLoader.vue'
 
-@Component
+@Component({
+  components: {
+    FullscreenLoader,
+  },
+})
 export default class CreateRole extends Vue {
   @Action
   private setActiveRole!: (role: object) => void
 
   private isFormValid = true
+  private isDialogShown = false
   private formData = {
     name: '',
   }
@@ -45,7 +56,9 @@ export default class CreateRole extends Vue {
 
   private submit() {
     if (this.form.validate()) {
+      this.isDialogShown = true
       this.$accesslayer.createRole(this.formData).then((data: object) => {
+        this.isDialogShown = false
         this.setActiveRole(data)
         this.$router.push('/')
       })

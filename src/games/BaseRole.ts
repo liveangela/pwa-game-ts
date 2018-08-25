@@ -1,7 +1,7 @@
 import {randomName} from './utils'
 
 export interface IBaseRoleInput {
-  name: string,
+  name: string
 }
 
 export class BaseRole {

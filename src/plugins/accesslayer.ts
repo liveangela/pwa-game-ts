@@ -15,23 +15,27 @@ const getInitBody = (data: object) => ({
 })
 
 const handleResponse = (response: Response) => {
-  if (response.ok) {
-    return response.json() // is a promise
-  } else {
-    return Promise.reject({
-      status: response.status,
-      statusText: response.statusText,
-    })
-  }
+  return response.ok ? response.json() : Promise.reject({
+    status: response.status,
+    statusText: response.statusText,
+  })
 }
 
 const handleError = (error: Error) => console.error(error)
 
 const functionCreator = (funcName: string) => {
-  return !isEnvProd ? gameEngine[funcName] : (data: object) => fetch(
+  return isEnvProd ? (data: object) => fetch(
     `${baseUrl}/${funcName}`,
     getInitBody(data),
-  ).then(handleResponse).catch(handleError)
+  ).then(handleResponse).catch(handleError) : (data: object) => {
+    return new Promise((resolve, reject) => {
+      try {
+        resolve(gameEngine[funcName](data))
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
 }
 // #endregion
 
